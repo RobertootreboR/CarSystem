@@ -40,20 +40,7 @@ public class Position {
 			return true; 
 		else 
 			return false;
-	}
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 	
 	
 }

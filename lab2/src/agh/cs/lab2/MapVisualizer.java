@@ -26,7 +26,7 @@ public class MapVisualizer {
 		for (int i = upperRight.y + 1; i >= lowerLeft.y - 1; i--) {
 			if (i == upperRight.y + 1) {
 				builder.append(" y\\x ");
-				for (int j = lowerLeft.y; j < upperRight.x + 1; j++) {
+				for (int j = lowerLeft.y; j <upperRight.x + 1; j++) {
 					builder.append(String.format("%2d", j));
 				}
 				builder.append(System.lineSeparator());

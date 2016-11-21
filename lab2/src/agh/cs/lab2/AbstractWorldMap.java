@@ -16,7 +16,7 @@ public abstract class AbstractWorldMap implements IWorldMap {
 			carList.add(car);
 			return true;
 		}
-		return false;
+		else throw new IllegalArgumentException("There is a car on position " + car.getPosition().toString() + "!!!");
 	}
 
 	@Override

@@ -1,20 +1,21 @@
 package agh.cs.lab2;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BoundedMap extends AbstractWorldMap implements IWorldMap {
 
 	private Position upRightCorner;
 	private Position leftDownCorner;
 
-	ArrayList<HayStack> hayStackList = new ArrayList<>();
+	protected Map<Position, HayStack>  hayStackMap = new HashMap<>();
 
-	public BoundedMap(int width, int height, ArrayList<HayStack> hayStackList) {
+	public BoundedMap(int width, int height, Map<Position, HayStack> hayStackMap) {
 		if(width>0 && height>0)
 			this.upRightCorner = new Position(width,height);
 		
 		this.leftDownCorner = new Position(0, 0);
-		this.hayStackList = hayStackList;
+		this.hayStackMap= hayStackMap;
 	}
 
 	@Override
@@ -25,20 +26,18 @@ public class BoundedMap extends AbstractWorldMap implements IWorldMap {
 	
 	@Override
 	public boolean isOccupied(Position position) {
-		for (HayStack hayStackIter : hayStackList) {
-			if (hayStackIter.getPosition().equals(position))
-				return true;
-		}
+		if( hayStackMap.containsKey(position))
+			return true;
+
 		return super.isOccupied(position);
 	}
 
 	@Override
 	public Object objectAt(Position position) {
-		
-		for (HayStack hayStackIter : this.hayStackList) {   
-			if (hayStackIter.getPosition().equals(position)) 
-				return hayStackIter;
-		}
+
+		if( hayStackMap.containsKey(position))
+			return hayStackMap.get(position);
+
 		return super.objectAt(position);
     }
 	

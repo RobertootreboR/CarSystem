@@ -6,13 +6,14 @@ public class Car {
 
 	private MapDirection orientation= MapDirection.North;
 	private Position carPosition;
-	private IWorldMap map;
+	private AbstractWorldMap map;
     private ArrayList<IPositionChangeListener> listenerList = new ArrayList<>();
 
 
-	public Car(IWorldMap map, int x, int y) {
+	public Car(AbstractWorldMap map, int x, int y) {
 		this.carPosition = new Position(x, y);
 		this.map = map;
+        listenerList.add(map);
 	}
     void addListener(IPositionChangeListener listener){
         listenerList.add(listener);

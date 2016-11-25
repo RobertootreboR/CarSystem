@@ -1,14 +1,14 @@
 package agh.cs.lab2;
 
 
-public class RectangularMap extends AbstractWorldMap implements IWorldMap {
+public class RectangularMap extends AbstractWorldMap{
 	private Position upRightCorner;
 	private Position leftDownCorner;
 
 
 	public RectangularMap(int width, int height) {
 		if(width>0 && height>0)
-		this.upRightCorner = new Position(width,height);
+			this.upRightCorner = new Position(width,height);
 		this.leftDownCorner = new Position(0, 0);
 	}
 

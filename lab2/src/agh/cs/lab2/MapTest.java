@@ -9,8 +9,6 @@ import org.junit.Test;
 
 public class MapTest {
 	
-	
-	
 	@Test
 	public void testUnbounded() {
 		String[] args= new String[] {"f","f","f","f","f","r","r","b","b","b","b","b","b"};

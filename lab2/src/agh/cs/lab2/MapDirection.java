@@ -18,7 +18,7 @@ public enum MapDirection {
 			return null;
 
 		}
-	}         // 
+	}
 
 	public MapDirection next() {
 		/*

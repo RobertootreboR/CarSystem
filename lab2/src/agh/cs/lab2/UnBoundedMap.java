@@ -2,7 +2,7 @@ package agh.cs.lab2;
 
 import java.util.ArrayList;
 
-public class UnBoundedMap extends AbstractWorldMap implements IWorldMap {
+public class UnBoundedMap extends AbstractWorldMap{
 	
 	ArrayList<HayStack> hayStackList = new ArrayList<>();
 	
@@ -30,6 +30,7 @@ public class UnBoundedMap extends AbstractWorldMap implements IWorldMap {
 	}
 	
 	private Position leftDownCorner(){
+		// uwaga bo dodaje tylko do mapy
 		//if(carList.size()==0) return null;
 		int minX=0, minY=0;
 		for(Car iter : carList){

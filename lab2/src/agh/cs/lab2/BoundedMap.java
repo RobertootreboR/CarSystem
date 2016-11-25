@@ -3,12 +3,12 @@ package agh.cs.lab2;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BoundedMap extends AbstractWorldMap implements IWorldMap {
+public class BoundedMap extends AbstractWorldMap {
 
 	private Position upRightCorner;
 	private Position leftDownCorner;
 
-	protected Map<Position, HayStack>  hayStackMap = new HashMap<>();
+	private Map<Position, HayStack>  hayStackMap = new HashMap<>();
 
 	public BoundedMap(int width, int height, Map<Position, HayStack> hayStackMap) {
 		if(width>0 && height>0)

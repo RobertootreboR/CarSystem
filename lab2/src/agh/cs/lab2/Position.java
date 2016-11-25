@@ -15,20 +15,16 @@ public class Position {
 	
 	
 	public boolean smaller(Position othe){
-		if((this.x <= othe.x) && (this.y <= othe.y))
-			return true;
-		else return false;
+		return ((this.x <= othe.x) && (this.y <= othe.y));
 	}
 	
 	public boolean larger(Position other){
-		if((this.x >= other.x) && (this.y >= other.y))
-			return true;
-		else return false;
+		return ((this.x >= other.x) && (this.y >= other.y));
+
 	}
 	
 	public Position add( Position other){
-		Position result = new Position(this.x + other.x , this.y + other.y);
-		return result;
+		return  new Position(this.x + other.x , this.y + other.y);
 	}
 	@Override
 	public boolean equals(Object other){

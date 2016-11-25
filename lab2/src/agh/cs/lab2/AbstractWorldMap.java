@@ -5,15 +5,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeListener{
-    public ArrayList<Car> carList = new ArrayList<>();
-    public Map<Position, Car> carMap = new HashMap<>();  // to public to tAK chwilowo
+    protected ArrayList<Car> carList = new ArrayList<>();
+    private Map<Position, Car> carMap = new HashMap<>();
 
 
     @Override
     public void positionChanged(Position oldPosition, Position newPosition) {
-        Car tmp = carMap.get(oldPosition);
+        Car tempCar = carMap.get(oldPosition);
         carMap.remove(oldPosition);
-        carMap.put(newPosition,tmp);
+        carMap.put(newPosition,tempCar);
     }
 
     @Override

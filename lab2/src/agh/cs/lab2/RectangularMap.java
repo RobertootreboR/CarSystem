@@ -1,6 +1,5 @@
 package agh.cs.lab2;
 
-import java.util.ArrayList;
 
 public class RectangularMap extends AbstractWorldMap implements IWorldMap {
 	private Position upRightCorner;

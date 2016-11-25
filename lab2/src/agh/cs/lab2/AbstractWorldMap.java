@@ -1,50 +1,59 @@
 package agh.cs.lab2;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public abstract class AbstractWorldMap implements IWorldMap {
-	protected ArrayList<Car> carList = new ArrayList<>();
+public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeListener{
+    public ArrayList<Car> carList = new ArrayList<>();
+    public Map<Position, Car> carMap = new HashMap<>();  // to public to tAK chwilowo
 
-	@Override
-	public boolean canMoveTo(Position position) {
-		return !isOccupied(position);
-	}
 
-	@Override
-	public boolean add(Car car) {
-		if(canMoveTo(car.getPosition())){
-			carList.add(car);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public void positionChanged(Position oldPosition, Position newPosition) {
+        Car tmp = carMap.get(oldPosition);
+        carMap.remove(oldPosition);
+        carMap.put(newPosition,tmp);
+    }
 
-	@Override
-	public void run(MoveDirection[] directions) {
-		int carListLength = carList.size();
-		for(int i =0; i< directions.length; i++){
-			if(directions[i]!=null){
-				carList.get(i%carListLength).move(directions[i]);
-			}
-		}
-	}
+    @Override
+    public boolean canMoveTo(Position position) {
+        return !isOccupied(position);
+    }
 
-	@Override
-	public boolean isOccupied(Position position) {
-		for (Car iter : carList) {
-			if (iter.getPosition().equals(position))
-				return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean add(Car car) {
+        if (canMoveTo(car.getPosition())) {
+            carList.add(car);
+            carMap.put(car.getPosition(), car);
+            return true;
+        } else throw new IllegalArgumentException("There is a car on position " + car.getPosition().toString() + "!!!");
+    }
 
-	@Override
-	public Object objectAt(Position position) {
-		for (Car iter : this.carList) {   
-			if (iter.getPosition().equals(position)) 
-				return iter;
-		}
-		return null;
-	}
+    @Override
+    public void run(MoveDirection[] directions) {
+        int carListLength = carList.size();
+        for (int i = 0; i < directions.length; i++) {
+            if (directions[i] != null) {
+                carList.get(i % carListLength).move(directions[i]);
+            }
+        }
+    }
+
+    @Override
+    public boolean isOccupied(Position position) {
+        if (carMap.containsKey(position))
+            return true;
+
+        return false;
+    }
+
+    @Override
+    public Object objectAt(Position position) {
+        if (carMap.containsKey(position))
+            return carMap.get(position);
+
+        return null;
+    }
 
 }

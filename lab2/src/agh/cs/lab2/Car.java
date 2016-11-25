@@ -1,19 +1,30 @@
 package agh.cs.lab2;
 
+import java.util.ArrayList;
+
 public class Car {
 
 	private MapDirection orientation= MapDirection.North;
 	private Position carPosition;
-	private IWorldMap map;
+	private AbstractWorldMap map;
+    private ArrayList<IPositionChangeListener> listenerList = new ArrayList<>();
 
-	public Car(IWorldMap map, int x, int y) {
+
+	public Car(AbstractWorldMap map, int x, int y) {
 		this.carPosition = new Position(x, y);
 		this.map = map;
+        listenerList.add(map);
 	}
-
-	public Car(IWorldMap map) {
-		this.map = map;
-	}
+    void addListener(IPositionChangeListener listener){
+        listenerList.add(listener);
+    }
+    void removeListener(IPositionChangeListener listener){
+        listenerList.remove(listener);
+    }
+    void positionChanged(Position oldPosition, Position newPosition){
+        for(IPositionChangeListener listener : listenerList)
+            listener.positionChanged(oldPosition, newPosition);
+    }
 
 	public Position getPosition() {
 		return carPosition;
@@ -95,8 +106,10 @@ public class Car {
 
 	private void changePositionIfPossible(int x, int y) {
 		Position changedPosition = carPosition.add(new Position(x, y));
-		if (map.canMoveTo(changedPosition))
+		if (map.canMoveTo(changedPosition)) {
+            positionChanged(carPosition,changedPosition);
 			carPosition = changedPosition;
+		}
 
 	}
 
